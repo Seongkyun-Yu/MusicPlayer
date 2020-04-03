@@ -2,6 +2,7 @@ const PLAY_ON = false;
 const PLAY_OFF = true;
 
 const $musicPlayer = document.getElementById('audio');
+let playingIndex = 0;
 
 const musics = [
   { title: 'Bongo Madness', fileName: 'Bongo_Madness', composer: 'Quincas Moreira', time: '3:09' },
@@ -9,7 +10,7 @@ const musics = [
   { title: 'I Feel Like Partying', fileName: 'I_Feel_Like_Partying', composer: 'Nat Keefe & BeatMower', time: '2:59' }
 ];
 
-// 뮤직 세팅
+// set music func
 const $musicTitle = document.getElementById('musicTitle');
 const $composer = document.getElementById('composer');
 const setMusic = (music) => {
@@ -20,7 +21,7 @@ const setMusic = (music) => {
 setMusic(musics[0]);
 
 
-// 플레이 상태 조정
+// play button
 const $playBtn = document.getElementById('playBtn');
 const isPlaying = () => ([...$playBtn.classList].includes('playing') ? true : false);
 const setPlayStatus = (boolean) => {
@@ -35,3 +36,17 @@ const setPlayStatus = (boolean) => {
   }
 };
 $playBtn.addEventListener('click', () => (isPlaying() ? setPlayStatus(PLAY_OFF) : setPlayStatus(PLAY_ON)));
+
+
+// next button
+const $nextBtn = document.getElementById('nextBtn');
+console.log($nextBtn);
+
+$nextBtn.addEventListener('click', () => {
+  playingIndex++;
+
+  if (playingIndex > musics.length - 1) playingIndex = 0;
+
+  setMusic(musics[playingIndex]);
+  setPlayStatus(PLAY_ON);
+});
