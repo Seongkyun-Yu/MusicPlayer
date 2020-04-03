@@ -197,9 +197,32 @@ body .player .muting {
   height:5px;
   background:red;
   margin:1px;
+
 }
-@keyframes ani_box01{
-  
+.animation .ani_box01{
+  animation-name:updown;
+  animation-direction:reverse;
+  animation-duratuion:1s;   
+}
+@keyframes updown{
+  0% {
+    height:15px;
+  }
+  20% {
+    height:20px;
+  }
+  40% {
+    height:25px;
+  }
+  60% {
+    height:30px;
+  }
+  80% {
+    height:25px;
+  }
+  100% {
+    height:20px;
+  }
 }
 
 
