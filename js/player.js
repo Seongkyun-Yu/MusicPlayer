@@ -17,7 +17,6 @@ const musics = [
 const $musicTitle = document.getElementById('musicTitle');
 const $composer = document.getElementById('composer');
 const $musicCover = document.querySelector('.player');
-console.log($musicCover.style.backgroundImage);
 const setMusic = (music) => {
   $musicPlayer.src = `music/${music.fileName}.mp3`;
   $musicTitle.innerText = music.title;
@@ -61,7 +60,8 @@ const setPlayStatus = (boolean) => {
     $musicPlayer.play();
   }
 };
-$playBtn.addEventListener('click', () => (isPlaying() ? setPlayStatus(PLAY_OFF) : setPlayStatus(PLAY_ON)));
+// $playBtn.addEventListener('click', () => (isPlaying() ? setPlayStatus(PLAY_OFF) : setPlayStatus(PLAY_ON)));
+$playBtn.addEventListener('click', () => setPlayStatus(isPlaying()));
 
 const playSelectedList = (e) => {
   const index = e.target.matches('ul > li') ? +e.target.id : +e.target.parentNode.id;
@@ -99,22 +99,44 @@ $prevBtn.addEventListener('click', () => {
   setPlayStatus(PLAY_ON);
 });
 
+
+// list button
+const $listBtn = document.querySelector('.listBtn');
+const $listContainer = document.querySelector('.listContainer');
+const $container = document.querySelector('.container');
+const isListOpen = () => ([...$playBtn.classList].includes('listOpen') ? true : false);
+const setListOpenStatus = (boolean) => {
+  if (boolean) {
+    $playBtn.classList.remove('listOpen');
+    $container.style.width = '400px';
+    $listContainer.style.display = 'none';
+  } else {
+    $playBtn.classList.add('listOpen');
+    $container.style.width = '800px';
+    $listContainer.style.display = 'block';
+  }
+};
+$listBtn.addEventListener('click', () => setListOpenStatus(isListOpen()));
+
+
 // mute button
 const $muteBtn = document.querySelector('.soundBtn');
-const isMuting = () => ([...$playBtn.classList].includes('muting') ? true : false);
+const isMuting = () => ([...$muteBtn.classList].includes('muting') ? true : false);
 $musicPlayer.volume = 0.5;
 let beforeVolume = $musicPlayer.volume;
 const setMuteStatus = (boolean) => {
   if (boolean) {
-    $playBtn.classList.remove('muting');
+    $muteBtn.classList.remove('muting');
+    $muteBtn.classList.add('unmuting');
     $musicPlayer.volume = beforeVolume;
   } else {
-    $playBtn.classList.add('muting');
+    $muteBtn.classList.remove('unmuting');
+    $muteBtn.classList.add('muting');
     beforeVolume = $musicPlayer.volume;
     $musicPlayer.volume = 0;
   }
 };
-$muteBtn.addEventListener('click', () => (isMuting ? setMuteStatus(MUTE_OFF) : setMuteStatus(MUTE_ON)));
+$muteBtn.addEventListener('click', () => setMuteStatus(isMuting()));
 
 
 // progressbar
