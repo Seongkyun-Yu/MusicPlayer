@@ -1,6 +1,9 @@
 const PLAY_ON = false;
 const PLAY_OFF = true;
 
+const MUTE_ON = false;
+const MUTE_OFF = true;
+
 const $musicPlayer = document.getElementById('audio');
 let playingIndex = 0;
 
@@ -13,15 +16,20 @@ const musics = [
 // set music func
 const $musicTitle = document.getElementById('musicTitle');
 const $composer = document.getElementById('composer');
+const $musicCover = document.querySelector('.player');
+console.log($musicCover.style.backgroundImage);
 const setMusic = (music) => {
   $musicPlayer.src = `music/${music.fileName}.mp3`;
   $musicTitle.innerText = music.title;
   $composer.innerText = music.composer;
+
+  $musicCover.style.backgroundImage = `url(img/${music.fileName}.jpg)`;
+  $musicCover.style.backgroundSize = 'cover';
 };
 setMusic(musics[0]);
 
 // list rendering func
-const $playList = document.getElementById('playList');
+const $playList = document.querySelector('.playList');
 const listRender = () => {
   let playList = '';
   musics.forEach((music, i) => {
@@ -90,6 +98,23 @@ $prevBtn.addEventListener('click', () => {
   setMusic(musics[playingIndex]);
   setPlayStatus(PLAY_ON);
 });
+
+// mute button
+const $muteBtn = document.querySelector('.soundBtn');
+const isMuting = () => ([...$playBtn.classList].includes('muting') ? true : false);
+$musicPlayer.volume = 0.5;
+let beforeVolume = $musicPlayer.volume;
+const setMuteStatus = (boolean) => {
+  if (boolean) {
+    $playBtn.classList.remove('muting');
+    $musicPlayer.volume = beforeVolume;
+  } else {
+    $playBtn.classList.add('muting');
+    beforeVolume = $musicPlayer.volume;
+    $musicPlayer.volume = 0;
+  }
+};
+$muteBtn.addEventListener('click', () => (isMuting ? setMuteStatus(MUTE_OFF) : setMuteStatus(MUTE_ON)));
 
 
 // progressbar
