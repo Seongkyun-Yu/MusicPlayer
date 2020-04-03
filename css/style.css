@@ -1,7 +1,8 @@
 @charset "utf-8";
 /* CSS Document */
-
-
+* {
+  font-family: "Noto Sans KR", sans-serif;
+}
 /*공통 css*/
 html,body{
   margin:0;
@@ -42,7 +43,7 @@ button{
 .container{
   position:relative;
   width:400px;
-  margin:100px auto;
+  margin:20px auto;
   display:flex;
   justify-content: space-between;
   box-shadow:5px 5px 8px 0px rgba(0, 0, 0, .1);
@@ -162,20 +163,7 @@ button{
     -webkit-appearance: none;
     margin-top:-2px;
 }
-.listContainer{
-  width:300px;
-  margin:0 auto;
-  padding:50px;
-  display: none;
-}
-.listContainer ul{}
-.listContainer ul li{
-  cursor:pointer;
-  padding:10px;
-  margin:10px;
-  background:#ccc;
-}
-.pauseing {
+.playBtnList .pauseing {
   background:url(../img/play.png)no-repeat !important;
   background-size:contain !important;
   width:100% !important;
@@ -184,17 +172,68 @@ button{
 }
 
 body .player .muting {
-  background:url(../img/mute.png) !important;
-  width: 28px !important;
-  height: 33px !important;
+  background:url(../img/mute.png)no-repeat;
+  background-size: contain;
+  width: 28px;
+  height: 33px;
 }
 
 .unmuting {
-  background: url(../img/sound.png)no-repeat !important;
-  background-size: contain !important;
-  width: 28px !important;
-  height: 33px !important;
-  position: absolute !important;
-  right: -3px !important;
-  top: 50px !important;
+  background: url(../img/sound.png)no-repeat;
+  background-size: contain;
+  width: 28px;
+  height: 33px;
+  position: absolute;
+  right: -3px;
+  top: 50px;
 }
+.animation{
+  position: absolute;
+  top: 50px;
+  display:flex;
+}
+.animation li{
+  width:10px;
+  height:5px;
+  background:red;
+  margin:1px;
+}
+@keyframes ani_box01{
+  
+}
+
+
+/*목록 페이지*/
+.listContainer{
+  width:400px;
+  margin:0 auto;
+  display: none;
+}
+.listContainer h2{
+  padding:0 30px;
+  font-size: 20px;
+  color: #333;
+}
+.listContainer ul li{
+  cursor: pointer;
+  padding: 10px 30px;
+  border-bottom: 1px solid #e1e1e1;
+  font-size: 15px;
+  position: relative;
+}
+.listContainer ul li strong{
+  font-weight:400;
+}
+.listContainer ul li span:nth-child(2){
+  display:block;
+  color:#999;
+}
+.listContainer ul li span:nth-child(3){
+  position: absolute;
+  right: 30px;
+  top: 20px;
+}
+.selected{
+  background:#f5f5f5;
+}
+
