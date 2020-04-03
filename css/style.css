@@ -94,7 +94,7 @@ button{
   order:1;
 }
 .playBtnList li:nth-child(1) button{
-  background:url(../img/pause.png)no-repeat;
+  background:url(../img/play.png)no-repeat;
   background-size:contain;
   width:100%;
   height:100%;     
@@ -163,8 +163,8 @@ button{
     -webkit-appearance: none;
     margin-top:-2px;
 }
-.playBtnList .pauseing {
-  background:url(../img/play.png)no-repeat !important;
+.playBtnList .playing {
+  background:url(../img/pause.png)no-repeat !important;
   background-size:contain !important;
   width:100% !important;
   height:100% !important;     
@@ -178,15 +178,6 @@ body .player .muting {
   height: 33px;
 }
 
-.unmuting {
-  background: url(../img/sound.png)no-repeat;
-  background-size: contain;
-  width: 28px;
-  height: 33px;
-  position: absolute;
-  right: -3px;
-  top: 50px;
-}
 .animation{
   position: absolute;
   top: 50px;
