@@ -10,34 +10,34 @@
 }
 @keyframes updown{
   0% {
-    top:0px;
+    height:2px;
   }
   10% {
-    top:10px;
+    height:5px;
   }
   20% {
-    top:50px;
+    height:20px;
   }
   30% {
-    top:20px;
+    height:10px;
   }
   40% {
-    top:60px;
+    height:5px;
   }
   50% {
-    top:40px;
+    height:20px;
   }
   60% {
-    height:80px;
+    height:14px;
   }
   70% {
-    height:100px;
+    height:10px;
   }
   80% {
-    height:50px;
+    height:6px;
   }
   90% {
-    height:20px;
+    height:17px;
   }
   100% {
     height:0px;
@@ -57,34 +57,34 @@
 }
 @keyframes updown02{
   0% {
-    height:0px;
+    height:3px;
   }
   10% {
-    height:50px;
+    height:15px;
   }
   20% {
-    height:70px;
+    height:5px;
   }
   30% {
-    height:100px;
+    height:15px;
   }
   40% {
-    height:40px;
+    height:4px;
   }
   50% {
-    height:70px;
+    height:14px;
   }
   60% {
-    height:50px;
+    height:4px;
   }
   70% {
-    height:80px;
+    height:18px;
   }
   80% {
-    height:20px;
+    height:6px;
   }
   90% {
-    height:50px;
+    height:9px;
   }
   100% {
     height:0px;
@@ -97,43 +97,57 @@
   animation-timing-function: linear;
   animation-delay: 0s;
   animation-iteration-count: infinite;
-  animation-direction: normal;
+  animation-direction: reverse;
   animation-fill-mode: forwards;
   animation-play-state: running; 
 }
 @keyframes updown03{
   0% {
-    height:0px;
+    height:7px;
+    transform: translateY(-10px);
   }
   10% {
-    height:50px;
+    height:15px;
+    transform: translateY(-15px);
   }
   20% {
-    height:30px;
+    height:15px;
+    transform: translateY(-15px);
   }
   30% {
-    height:100px;
+    height:20px;
+    transform: translateY(-20px);
   }
   40% {
-    height:50px;
+    height:18px;
+    transform: translateY(-18px);
   }
   50% {
-    height:20px;
+    height:16px;
+    transform: translateY(-16px);
   }
   60% {
-    height:60px;
+    height:15px;
+    transform: translateY(-15px);
   }
   70% {
-    height:100px;
+    height:12px;
+    transform: translateY(-12px);
   }
   80% {
-    height:30px;
+    height:17px;
+    transform: translateY(-17px);
   }
   90% {
-    height:10px;
+    height:15px;
+    transform: translateY(-15px);
   }
   100% {
-    height:0px;
+    height:8px;
+    transform: translateY(-8px);
   }
-  
+  90% {
+    height:15px;
+    transform: translateY(-15px);
+  }
 }
