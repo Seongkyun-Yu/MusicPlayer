@@ -1,6 +1,9 @@
 const PLAY_ON = false;
 const PLAY_OFF = true;
 
+const MUTE_ON = false;
+const MUTE_OFF = true;
+
 const $musicPlayer = document.getElementById('audio');
 let playingIndex = 0;
 
@@ -13,15 +16,19 @@ const musics = [
 // set music func
 const $musicTitle = document.getElementById('musicTitle');
 const $composer = document.getElementById('composer');
+const $musicCover = document.querySelector('.player');
 const setMusic = (music) => {
   $musicPlayer.src = `music/${music.fileName}.mp3`;
   $musicTitle.innerText = music.title;
   $composer.innerText = music.composer;
+
+  $musicCover.style.backgroundImage = `url(img/${music.fileName}.jpg)`;
+  $musicCover.style.backgroundSize = 'cover';
 };
 setMusic(musics[0]);
 
 // list rendering func
-const $playList = document.getElementById('playList');
+const $playList = document.querySelector('.playList');
 const listRender = () => {
   let playList = '';
   musics.forEach((music, i) => {
@@ -53,7 +60,8 @@ const setPlayStatus = (boolean) => {
     $musicPlayer.play();
   }
 };
-$playBtn.addEventListener('click', () => (isPlaying() ? setPlayStatus(PLAY_OFF) : setPlayStatus(PLAY_ON)));
+// $playBtn.addEventListener('click', () => (isPlaying() ? setPlayStatus(PLAY_OFF) : setPlayStatus(PLAY_ON)));
+$playBtn.addEventListener('click', () => setPlayStatus(isPlaying()));
 
 const playSelectedList = (e) => {
   const index = e.target.matches('ul > li') ? +e.target.id : +e.target.parentNode.id;
@@ -90,6 +98,45 @@ $prevBtn.addEventListener('click', () => {
   setMusic(musics[playingIndex]);
   setPlayStatus(PLAY_ON);
 });
+
+
+// list button
+const $listBtn = document.querySelector('.listBtn');
+const $listContainer = document.querySelector('.listContainer');
+const $container = document.querySelector('.container');
+const isListOpen = () => ([...$playBtn.classList].includes('listOpen') ? true : false);
+const setListOpenStatus = (boolean) => {
+  if (boolean) {
+    $playBtn.classList.remove('listOpen');
+    $container.style.width = '400px';
+    $listContainer.style.display = 'none';
+  } else {
+    $playBtn.classList.add('listOpen');
+    $container.style.width = '800px';
+    $listContainer.style.display = 'block';
+  }
+};
+$listBtn.addEventListener('click', () => setListOpenStatus(isListOpen()));
+
+
+// mute button
+const $muteBtn = document.querySelector('.soundBtn');
+const isMuting = () => ([...$muteBtn.classList].includes('muting') ? true : false);
+$musicPlayer.volume = 0.5;
+let beforeVolume = $musicPlayer.volume;
+const setMuteStatus = (boolean) => {
+  if (boolean) {
+    $muteBtn.classList.remove('muting');
+    $muteBtn.classList.add('unmuting');
+    $musicPlayer.volume = beforeVolume;
+  } else {
+    $muteBtn.classList.remove('unmuting');
+    $muteBtn.classList.add('muting');
+    beforeVolume = $musicPlayer.volume;
+    $musicPlayer.volume = 0;
+  }
+};
+$muteBtn.addEventListener('click', () => setMuteStatus(isMuting()));
 
 
 // progressbar

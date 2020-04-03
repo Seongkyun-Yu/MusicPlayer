@@ -182,3 +182,19 @@ button{
   height:100% !important;     
   /* background-color: red !important;  */
 }
+
+body .player .muting {
+  background:url(../img/mute.png) !important;
+  width: 28px !important;
+  height: 33px !important;
+}
+
+.unmuting {
+  background: url(../img/sound.png)no-repeat !important;
+  background-size: contain !important;
+  width: 28px !important;
+  height: 33px !important;
+  position: absolute !important;
+  right: -3px !important;
+  top: 50px !important;
+}
