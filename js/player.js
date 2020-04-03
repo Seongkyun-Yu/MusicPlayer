@@ -1,3 +1,4 @@
+// play status
 const PLAY_ON = false;
 
 // play control buttons
@@ -6,7 +7,13 @@ const $playBtn = document.getElementById('playBtn');
 const $nextBtn = document.getElementById('nextBtn');
 const $prevBtn = document.getElementById('prevBtn');
 
+// album info
+const $musicTitle = document.getElementById('musicTitle');
+const $composer = document.getElementById('composer');
+const $musicCover = document.querySelector('.player');
+
 // list buttons
+const $playList = document.querySelector('.playList');
 const $listBtn = document.querySelector('.listBtn');
 const $listContainer = document.querySelector('.listContainer');
 const $container = document.querySelector('.container');
@@ -27,9 +34,6 @@ const musics = [
 ];
 
 // set music func
-const $musicTitle = document.getElementById('musicTitle');
-const $composer = document.getElementById('composer');
-const $musicCover = document.querySelector('.player');
 const setMusic = (music) => {
   $musicPlayer.src = `music/${music.fileName}.mp3`;
   $musicTitle.innerText = music.title;
@@ -40,7 +44,6 @@ const setMusic = (music) => {
 };
 
 // list rendering func
-const $playList = document.querySelector('.playList');
 const listRender = () => {
   let playList = '';
   musics.forEach((music) => {
