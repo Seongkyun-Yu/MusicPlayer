@@ -20,6 +20,24 @@ const setMusic = (music) => {
 };
 setMusic(musics[0]);
 
+// list rendering func
+const $playList = document.getElementById('playList');
+const listRender = () => {
+  let playList = '';
+  musics.forEach((music, i) => {
+    playList += `<li id=${i} class="listContent"><strong>${music.title}</strong><span>${music.composer}</span>
+    <span>${music.time}</span></li>`;
+  });
+  $playList.innerHTML = playList;
+};
+listRender();
+
+const paintSelectedList = (index) => {
+  [...$playList.children].forEach(li => li.classList.remove('selected'));
+  $playList.children[index].classList.add('selected');
+};
+paintSelectedList(playingIndex);
+
 
 // play button
 const $playBtn = document.getElementById('playBtn');
@@ -37,6 +55,16 @@ const setPlayStatus = (boolean) => {
 };
 $playBtn.addEventListener('click', () => (isPlaying() ? setPlayStatus(PLAY_OFF) : setPlayStatus(PLAY_ON)));
 
+const playSelectedList = (e) => {
+  const index = e.target.matches('ul > li') ? +e.target.id : +e.target.parentNode.id;
+
+  playingIndex = index;
+  paintSelectedList(index);
+  setMusic(musics[index]);
+  setPlayStatus(PLAY_ON);
+};
+$playList.addEventListener('click', playSelectedList);
+
 
 // next button
 const $nextBtn = document.getElementById('nextBtn');
@@ -45,6 +73,7 @@ $nextBtn.addEventListener('click', () => {
 
   if (playingIndex > musics.length - 1) playingIndex = 0;
 
+  paintSelectedList(playingIndex);
   setMusic(musics[playingIndex]);
   setPlayStatus(PLAY_ON);
 });
@@ -57,6 +86,7 @@ $prevBtn.addEventListener('click', () => {
 
   if (playingIndex < 0) playingIndex = musics.length - 1;
 
+  paintSelectedList(playingIndex);
   setMusic(musics[playingIndex]);
   setPlayStatus(PLAY_ON);
 });
@@ -64,10 +94,13 @@ $prevBtn.addEventListener('click', () => {
 
 // progressbar
 const $progressbar = document.getElementById('progressbar');
+$progressbar.value = 0;
 
 const setProgToRuntime = () => {
-  const duration = isNaN($musicPlayer.duration) ? 0 : $musicPlayer.duration;
-  $progressbar.value = ($musicPlayer.currentTime / duration) * 100;
+  const { duration } = $musicPlayer;
+  // console.log(($musicPlayer.currentTime / duration) * 100);
+  // console.log(duration);
+  $progressbar.value = isNaN(duration) ? 0 : ($musicPlayer.currentTime / duration) * 100;
 };
 
 const setRuntimeToProg = () => {
@@ -83,16 +116,3 @@ $progressbar.addEventListener('change', setRuntimeToProg);
 
 $progressbar.addEventListener('mousedown', removeSetProg);
 $progressbar.addEventListener('mouseup', addSetProg);
-const $playList = document.getElementById('playList');
-
-
-// list rendering func
-const listRender = function () {
-  let playList = '';
-  musics.forEach((music, i) =>{
-    playList += `<li id=${i} class="listContent"><strong>${music.title}</strong><span>${music.composer}</span>
-    <span>${music.time}</span></li>`;
-  });
-  $playList.innerHTML = playList;
-};
-listRender();
