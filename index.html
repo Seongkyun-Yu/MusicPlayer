@@ -4,6 +4,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>해커톤</title>
   <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="./css/animation.css" />
   <!-- google fonts -->
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,500,700,900&display=swap&subset=korean" rel="stylesheet"/>
 </head>
@@ -18,18 +19,24 @@
           <p id="composer">chris haugen</p>
         </div>
         <ul class="playBtnList">
-          <li><button name="play" type="button" class="pauseing screen-reader" id="playBtn">재생</button></li>
+          <li><button name="play" type="button" class="screen-reader" id="playBtn">재생</button></li>
           <li><button name="pre" type="button" class="screen-reader" id="prevBtn">이전곡</button></li>
           <li><button name="next" type="button" class="screen-reader" id="nextBtn">다음곡</button></li>
         </ul>
         <button name="list" type="button" class="listBtn">재생목록열기</button>
         <button name="sound" type="button" class="soundBtn">사운드</button>
-        <input id="progressbar" class="rangeCustom" type="range">
+        <div>
+          <input id="progressbar" class="rangeCustom" type="range">
+          <ul class="timeSeting">
+            <li>123</li>
+            <li>435</li>
+          </ul>
+        </div>
         <div>
           <ul class="animation">
             <li class="ani_box01"></li>
-            <li class="ani_box01"></li>
-            <li class="ani_box01"></li>
+            <li class="ani_box02"></li>
+            <li class="ani_box03"></li>
           </ul>
         </div>
       </div>
