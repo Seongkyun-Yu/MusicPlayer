@@ -1,6 +1,6 @@
 # MusicPlayer
 
-![musicplayer](https://user-images.githubusercontent.com/15887982/78370257-61700e80-7601-11ea-9f70-b1188a956105.png)
+![musicplayer](https://user-images.githubusercontent.com/15887982/78371446-f1628800-7602-11ea-9ced-e25c27997774.png)
 
 간단한 기능을 가진 뮤직플레이어 입니다.
 
