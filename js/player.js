@@ -5,7 +5,7 @@ const $musicPlayer = document.getElementById('audio');
 
 const musics = [
   { id: 0, title: 'Bongo Madness', fileName: 'Bongo_Madness', composer: 'Quincas Moreira', time: '3:09' },
-  { id: 1, title: 'Morning Mandolin', fileName: 'Morning_Mandolin', composer: 'chris haugen', time: '3:29' },
+  { id: 1, title: 'Morning Mandolin', fileName: 'Morning_Mandolin', composer: 'chris haugen', time: '3:39' },
   { id: 2, title: 'I Feel Like Partying', fileName: 'I_Feel_Like_Partying', composer: 'Nat Keefe & BeatMower', time: '2:59' }
 ];
 
@@ -138,13 +138,23 @@ $muteBtn.addEventListener('click', () => setMuteStatus(isMuting()));
 
 // progressbar
 const $progressbar = document.getElementById('progressbar');
+const $audioCurrentTime = document.getElementById('audioCurrentTime');
+const $audioDuration = document.getElementById('audioDuration');
 $progressbar.value = 0;
 
+const calcTime = (time) => {
+  const min = Math.floor(time / 60);
+  let sec = Math.floor(time - (min * 60));
+  sec = sec >= 10 ? sec : `0${sec}`;
+
+  return `${min}:${sec}`;
+};
+
 const setProgToRuntime = () => {
-  const { duration } = $musicPlayer;
-  // console.log(($musicPlayer.currentTime / duration) * 100);
-  // console.log(duration);
-  $progressbar.value = isNaN(duration) ? 0 : ($musicPlayer.currentTime / duration) * 100;
+  const isNaNDuration = isNaN($musicPlayer.duration);
+  $progressbar.value = isNaNDuration ? 0 : ($musicPlayer.currentTime / $musicPlayer.duration) * 100;
+  $audioDuration.innerText = isNaNDuration ? '00:00' : calcTime($musicPlayer.duration);
+  $audioCurrentTime.innerText = calcTime($musicPlayer.currentTime);
 };
 
 const setRuntimeToProg = () => {
