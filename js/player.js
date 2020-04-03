@@ -158,7 +158,7 @@ const calcTime = (time) => {
 const setProgToRuntime = () => {
   const isNaNDuration = isNaN($musicPlayer.duration);
   $progressbar.value = isNaNDuration ? 0 : ($musicPlayer.currentTime / $musicPlayer.duration) * 100;
-  $audioDuration.innerText = isNaNDuration ? '00:00' : calcTime($musicPlayer.duration);
+  $audioDuration.innerText = isNaNDuration ? '0:00' : calcTime($musicPlayer.duration);
   $audioCurrentTime.innerText = calcTime($musicPlayer.currentTime);
 };
 
