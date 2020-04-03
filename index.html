@@ -6,35 +6,34 @@
   <link rel="stylesheet" href="./css/style.css" />
 </head>
 <body>
-  <div class="playerContainer">
+  <div class="container">
     <h1 class="a11yHidden">뮤직플레이</h1>
-    <section>
-      <audio src=""></audio>
+    <section class="player">
+      <audio id="audio" src=""></audio>
       <div class="playerContentArea">
-        <div class="MusicTitle">
-          <h2>Morning Mandolin</h2>
-          <p>chris haugen</p>
+        <div class="musicTitle">
+          <h2 id="musicTitle">Morning Mandolin</h2>
+          <p id="composer">chris haugen</p>
         </div>
-        <ul class="playBtnArea">
-          <li><button name="button" type="button" value="재생">재생</button></li>
-          <li><button name="button" type="button" value="이전노래">이전노래</button></li>
-          <li><button name="button" type="button" value="다음노래">다음노래</button></li>
+        <ul class="playBtnList">
+          <li><button name="play" type="button" class="pauseing screen-reader" id="play">재생</button></li>
+          <li><button name="pre" type="button" class="screen-reader" id="prev">이전곡</button></li>
+          <li><button name="next" type="button" class="screen-reader" id="next">다음곡</button></li>
         </ul>
-        <button name="button" type="button" value="재생목록">재생목록</button>
-        <button name="button" type="button" value="사운드">사운드</button>
-        <div class="rangeCustom">
-          <input type="range">
-        </div>  
+        <button name="list" type="button" class="listBtn">재생목록열기</button>
+         <button name="sound" type="button" class="soundBtn">사운드</button>
+        <input id="progressbar" class="rangeCustom" type="range">
       </div>
     </section>
-    <section>
+    <section class="listContainer">
       <h2>재생목록</h2>
-      <ul>
-        <li>
-          <strong>Morning Mandolin</strong>
-        </li>
+      <ul class="playList">
+        <li class="listContent"><strong>제목</strong><span>가수</span><span>시간</span></li>
+        <li class="listContent"><strong>제목</strong><span>가수</span><span>시간</span></li>
+        <li class="listContent"><strong>제목</strong><span>가수</span><span>시간</span></li>
       </ul>
     </section>
-  </div>  
+    <script src="player.js"></script>
+  </div>
 </body>
 </html>
