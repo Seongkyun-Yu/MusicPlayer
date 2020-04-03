@@ -6,33 +6,35 @@
   <link rel="stylesheet" href="./css/style.css" />
 </head>
 <body>
-  <div class="container">
-    <h1 class=".a11yHidden">뮤직플레이</h1>
-    <section id="player">
+  <div class="playerContainer">
+    <h1 class="a11yHidden">뮤직플레이</h1>
+    <section>
       <audio src=""></audio>
-      <div class="musicTitle">
-        <h2>Morning Mandolin</h2>
-        <p>chris haugen</p>
-      </div>
-      <ul playBtnList>
-        <li><button class="pauseing">재생</button></li>
-        <li><button>이전곡</button></li>
-        <li><button>다음곡</button></li>
-      </ul>
-      <div class="listBtn"><button>재생목록열기</button></div>
-      <div class="soundBtn"><button>사운드</button></div>
-      <div class="rangeCustom">
-        <input type="range">
+      <div class="playerContentArea">
+        <div class="MusicTitle">
+          <h2>Morning Mandolin</h2>
+          <p>chris haugen</p>
+        </div>
+        <ul class="playBtnArea">
+          <li><button name="button" type="button" value="재생">재생</button></li>
+          <li><button name="button" type="button" value="이전노래">이전노래</button></li>
+          <li><button name="button" type="button" value="다음노래">다음노래</button></li>
+        </ul>
+        <button name="button" type="button" value="재생목록">재생목록</button>
+        <button name="button" type="button" value="사운드">사운드</button>
+        <div class="rangeCustom">
+          <input type="range">
+        </div>  
       </div>
     </section>
-    <section class="ListContainer">
+    <section>
       <h2>재생목록</h2>
-      <ul class="playList">
-        <li class="listContent"><strong>제목</strong><span>가수</span><span>시간</span></li>
-        <li class="listContent"><strong>제목</strong><span>가수</span><span>시간</span></li>
-        <li class="listContent"><strong>제목</strong><span>가수</span><span>시간</span></li>
+      <ul>
+        <li>
+          <strong>Morning Mandolin</strong>
+        </li>
       </ul>
     </section>
-  </div>
+  </div>  
 </body>
 </html>
