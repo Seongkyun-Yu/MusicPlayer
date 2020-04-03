@@ -1,11 +1,28 @@
 const PLAY_ON = false;
-let playingIndex = 0;
 
+// play control buttons
 const $musicPlayer = document.getElementById('audio');
+const $playBtn = document.getElementById('playBtn');
+const $nextBtn = document.getElementById('nextBtn');
+const $prevBtn = document.getElementById('prevBtn');
 
+// list buttons
+const $listBtn = document.querySelector('.listBtn');
+const $listContainer = document.querySelector('.listContainer');
+const $container = document.querySelector('.container');
+
+// progressbar
+const $progressbar = document.getElementById('progressbar');
+const $audioCurrentTime = document.getElementById('audioCurrentTime');
+const $audioDuration = document.getElementById('audioDuration');
+
+// menu button
+const $muteBtn = document.querySelector('.soundBtn');
+
+// music list
 const musics = [
   { id: 0, title: 'Bongo Madness', fileName: 'Bongo_Madness', composer: 'Quincas Moreira', time: '3:09' },
-  { id: 1, title: 'Morning Mandolin', fileName: 'Morning_Mandolin', composer: 'chris haugen', time: '3:29' },
+  { id: 1, title: 'Morning Mandolin', fileName: 'Morning_Mandolin', composer: 'chris haugen', time: '3:39' },
   { id: 2, title: 'I Feel Like Partying', fileName: 'I_Feel_Like_Partying', composer: 'Nat Keefe & BeatMower', time: '2:59' }
 ];
 
@@ -21,7 +38,6 @@ const setMusic = (music) => {
   $musicCover.style.backgroundImage = `url(img/${music.fileName}.jpg)`;
   $musicCover.style.backgroundSize = 'cover';
 };
-setMusic(musics[0]);
 
 // list rendering func
 const $playList = document.querySelector('.playList');
@@ -33,70 +49,65 @@ const listRender = () => {
   });
   $playList.innerHTML = playList;
 };
-listRender();
 
 const paintSelectedList = (index) => {
   [...$playList.children].forEach((li) => li.classList.remove('selected'));
   $playList.children[index].classList.add('selected');
 };
-paintSelectedList(playingIndex);
 
 
-// play button
-const $playBtn = document.getElementById('playBtn');
+// control player to button
 const isPlaying = () => ([...$playBtn.classList].includes('playing'));
-const setPlayStatus = (boolean) => {
-  if (boolean) {
-    $playBtn.classList.remove('playing');
-    $musicPlayer.pause();
-  } else {
-    $playBtn.classList.add('playing');
-    $musicPlayer.play();
-  }
-};
-$playBtn.addEventListener('click', () => setPlayStatus(isPlaying()));
 
-const playSelectedList = (e) => {
-  const index = e.target.matches('ul > li') ? +e.target.id : +e.target.parentNode.id;
+const playControler = (function() {
+  let playingIndex = 0;
 
-  playingIndex = index;
-  paintSelectedList(index);
-  setMusic(musics[index]);
-  setPlayStatus(PLAY_ON);
-};
-$playList.addEventListener('click', playSelectedList);
+  const setPlayStatus = (boolean) => {
+    if (boolean) {
+      $playBtn.classList.remove('playing');
+      $musicPlayer.pause();
+    } else {
+      $playBtn.classList.add('playing');
+      $musicPlayer.play();
+    }
+  };
+
+  const playSelectedList = (e) => {
+    const index = e.target.matches('ul > li') ? +e.target.id : +e.target.parentNode.id;
+
+    playingIndex = index;
+    paintSelectedList(index);
+    setMusic(musics[index]);
+    setPlayStatus(PLAY_ON);
+  };
+
+  const playNext = () => {
+    playingIndex++;
+
+    if (playingIndex > musics.length - 1) playingIndex = 0;
+
+    paintSelectedList(playingIndex);
+    setMusic(musics[playingIndex]);
+    setPlayStatus(PLAY_ON);
+  };
+
+  const playPrev = () => {
+    playingIndex--;
+
+    if (playingIndex < 0) playingIndex = musics.length - 1;
+
+    paintSelectedList(playingIndex);
+    setMusic(musics[playingIndex]);
+    setPlayStatus(PLAY_ON);
+  };
+
+  return {
+    setPlayStatus, playSelectedList, playNext, playPrev
+  };
+}());
 
 
-// next button
-const $nextBtn = document.getElementById('nextBtn');
-$nextBtn.addEventListener('click', () => {
-  playingIndex++;
-
-  if (playingIndex > musics.length - 1) playingIndex = 0;
-
-  paintSelectedList(playingIndex);
-  setMusic(musics[playingIndex]);
-  setPlayStatus(PLAY_ON);
-});
-
-
-// prev button
-const $prevBtn = document.getElementById('prevBtn');
-$prevBtn.addEventListener('click', () => {
-  playingIndex--;
-
-  if (playingIndex < 0) playingIndex = musics.length - 1;
-
-  paintSelectedList(playingIndex);
-  setMusic(musics[playingIndex]);
-  setPlayStatus(PLAY_ON);
-});
-
-
-// list button
-const $listBtn = document.querySelector('.listBtn');
-const $listContainer = document.querySelector('.listContainer');
-const $container = document.querySelector('.container');
+// list button func
 const isListOpen = () => ([...$playBtn.classList].includes('listOpen'));
 const setListOpenStatus = (boolean) => {
   if (boolean) {
@@ -109,13 +120,10 @@ const setListOpenStatus = (boolean) => {
     $listContainer.style.display = 'block';
   }
 };
-$listBtn.addEventListener('click', () => setListOpenStatus(isListOpen()));
 
 
-// mute button
-const $muteBtn = document.querySelector('.soundBtn');
+// mute button func
 const isMuting = () => ([...$muteBtn.classList].includes('muting'));
-$musicPlayer.volume = 0.5;
 
 const setMuteStatus = (function() {
   let beforeVolume = $musicPlayer.volume;
@@ -133,18 +141,22 @@ const setMuteStatus = (function() {
 
   return setStatus;
 }());
-$muteBtn.addEventListener('click', () => setMuteStatus(isMuting()));
 
 
-// progressbar
-const $progressbar = document.getElementById('progressbar');
-$progressbar.value = 0;
+// progressbar funcs
+const calcTime = (time) => {
+  const min = Math.floor(time / 60);
+  let sec = Math.floor(time - (min * 60));
+  sec = sec >= 10 ? sec : `0${sec}`;
+
+  return `${min}:${sec}`;
+};
 
 const setProgToRuntime = () => {
-  const { duration } = $musicPlayer;
-  // console.log(($musicPlayer.currentTime / duration) * 100);
-  // console.log(duration);
-  $progressbar.value = isNaN(duration) ? 0 : ($musicPlayer.currentTime / duration) * 100;
+  const isNaNDuration = isNaN($musicPlayer.duration);
+  $progressbar.value = isNaNDuration ? 0 : ($musicPlayer.currentTime / $musicPlayer.duration) * 100;
+  $audioDuration.innerText = isNaNDuration ? '00:00' : calcTime($musicPlayer.duration);
+  $audioCurrentTime.innerText = calcTime($musicPlayer.currentTime);
 };
 
 const setRuntimeToProg = () => {
@@ -155,8 +167,25 @@ const setRuntimeToProg = () => {
 const removeSetProg = () => $musicPlayer.removeEventListener('timeupdate', setProgToRuntime);
 const addSetProg = () => $musicPlayer.addEventListener('timeupdate', setProgToRuntime);
 
+
+// init config
+setMusic(musics[0]);
+listRender();
+paintSelectedList(0);
+
+// add Event Listener
+// play control buttons
+$playBtn.addEventListener('click', () => playControler.setPlayStatus(isPlaying())); // play button
+$playList.addEventListener('click', playControler.playSelectedList); // play selected playlist
+$nextBtn.addEventListener('click', playControler.playNext); // next button
+$prevBtn.addEventListener('click', playControler.playPrev); // prev button
+
+// menu bottons
+$listBtn.addEventListener('click', () => setListOpenStatus(isListOpen()));
+$muteBtn.addEventListener('click', () => setMuteStatus(isMuting()));
+
+// progressbar
 $musicPlayer.addEventListener('timeupdate', setProgToRuntime);
 $progressbar.addEventListener('change', setRuntimeToProg);
-
 $progressbar.addEventListener('mousedown', removeSetProg);
 $progressbar.addEventListener('mouseup', addSetProg);
