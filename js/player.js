@@ -83,3 +83,16 @@ $progressbar.addEventListener('change', setRuntimeToProg);
 
 $progressbar.addEventListener('mousedown', removeSetProg);
 $progressbar.addEventListener('mouseup', addSetProg);
+const $playList = document.getElementById('playList');
+
+
+// list rendering func
+const listRender = function () {
+  let playList = '';
+  musics.forEach((music, i) =>{
+    playList += `<li id=${i} class="listContent"><strong>${music.title}</strong><span>${music.composer}</span>
+    <span>${music.time}</span></li>`;
+  });
+  $playList.innerHTML = playList;
+};
+listRender();
