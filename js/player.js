@@ -40,8 +40,6 @@ $playBtn.addEventListener('click', () => (isPlaying() ? setPlayStatus(PLAY_OFF) 
 
 // next button
 const $nextBtn = document.getElementById('nextBtn');
-console.log($nextBtn);
-
 $nextBtn.addEventListener('click', () => {
   playingIndex++;
 
@@ -50,3 +48,38 @@ $nextBtn.addEventListener('click', () => {
   setMusic(musics[playingIndex]);
   setPlayStatus(PLAY_ON);
 });
+
+
+// prev button
+const $prevBtn = document.getElementById('prevBtn');
+$prevBtn.addEventListener('click', () => {
+  playingIndex--;
+
+  if (playingIndex < 0) playingIndex = musics.length - 1;
+
+  setMusic(musics[playingIndex]);
+  setPlayStatus(PLAY_ON);
+});
+
+
+// progressbar
+const $progressbar = document.getElementById('progressbar');
+
+const setProgToRuntime = () => {
+  const duration = isNaN($musicPlayer.duration) ? 0 : $musicPlayer.duration;
+  $progressbar.value = ($musicPlayer.currentTime / duration) * 100;
+};
+
+const setRuntimeToProg = () => {
+  const duration = isNaN($musicPlayer.duration) ? 0 : $musicPlayer.duration;
+  $musicPlayer.currentTime = ($progressbar.value / 100) * duration;
+};
+
+const removeSetProg = () => $musicPlayer.removeEventListener('timeupdate', setProgToRuntime);
+const addSetProg = () => $musicPlayer.addEventListener('timeupdate', setProgToRuntime);
+
+$musicPlayer.addEventListener('timeupdate', setProgToRuntime);
+$progressbar.addEventListener('change', setRuntimeToProg);
+
+$progressbar.addEventListener('mousedown', removeSetProg);
+$progressbar.addEventListener('mouseup', addSetProg);
