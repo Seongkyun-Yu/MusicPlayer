@@ -1,0 +1,185 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+/*공통 css*/
+html,body{
+  margin:0;
+  padding:0;
+}
+legend, .a11yHidden{
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  clip-path: polygon(0 0, 0 0, 0 0);
+}
+ul,li,dl{
+  list-style:none;
+  margin:0;
+  padding:0;
+}
+button{
+  padding:0;
+  margin:0;
+  border:0;   
+  cursor:pointer;
+}
+.screen-reader {
+   border: 0;
+   clip: rect(0 0 0 0);
+   height: 1px;
+   margin: -1px;
+   overflow: hidden;
+   padding: 0;
+   white-space: nowrap;
+   width: 1px;
+}
+
+
+/*컨텐츠 css 시작*/
+.container{
+  position:relative;
+  width:400px;
+  margin:100px auto;
+  display:flex;
+  justify-content: space-between;
+  box-shadow:5px 5px 8px 0px rgba(0, 0, 0, .1);
+}
+.player{
+  width:400px;
+  height: 650px;  
+  margin:0 auto;
+  background:url(../img/Bongo_Madness.jpg) no-repeat;
+  background-size: cover;
+  position: relative;
+}
+.playerContentArea{
+  position: absolute;
+  width: 75%;
+  bottom: 20px;
+  text-align: center;
+  margin: 0 50px;
+  height: 200px;
+}
+.musicTitle{
+  margin:50px 0;   
+}
+.musicTitle h2{
+  font-size: 18px;
+  margin-bottom: 0;
+  color: #fff;
+  font-weight: 400;   
+}
+.musicTitle p{
+  font-size: 15px;
+  margin: 0;
+  color: #e6e0d7;   
+}
+.playerContentArea button{
+  font-size:0;      
+  outline:none;
+}
+.playBtnList{
+  display: flex;
+  justify-content: space-around;
+}
+.playBtnList li{
+  width:34px;
+  height:40px;   
+}
+.playBtnList li:nth-child(1){
+  order:1;
+}
+.playBtnList li:nth-child(1) button{
+  background:url(../img/pause.png)no-repeat;
+  background-size:contain;
+  width:100%;
+  height:100%;     
+  /* background-color: blue; */
+}
+.playBtnList li:nth-child(2) button{
+  background:url(../img/prev.png)no-repeat;
+  background-size:contain;
+  width:100%;
+  height:100%;     
+}
+.playBtnList li:nth-child(3) button{
+  background:url(../img/next.png)no-repeat;
+  background-size:contain;
+  width:100%;
+  height:100%;     
+}
+.playBtnList li:nth-child(3){
+  order:2;
+}
+.listBtn{
+  background: url(../img/playlist.png)no-repeat;
+  background-size: contain;
+  width: 21px;
+  height: 17px;
+  position: absolute;
+  left: 0;
+  top: 58px;     
+}
+.soundBtn{
+  background: url(../img/sound.png)no-repeat;
+  background-size: contain;
+  width: 28px;
+  height: 33px;
+  position: absolute;
+  right: -3px;
+  top: 50px;    
+}
+.playerContentArea [type=range]{
+  position: absolute;
+  top: 0;
+  left: -2px;   
+  width: 100%;   
+  height: 1px;
+  -webkit-appearance: none;
+  outline: none;
+  background:#e6e0d7;
+}
+.playerContentArea input[type=range]::-webkit-slider-thumb{
+    border: 1px solid #fff;
+    height: 10px;
+    width: 10px;
+   border-radius:50px;
+    background: #fff;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top:-2px;
+}
+.playerContentArea input[type=range]::-ms-thumb {
+    border: 1px solid #fff;
+    height: 10px;
+    width: 10px;
+   border-radius:50px;
+    background: #fff;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top:-2px;
+}
+.listContainer{
+  width:300px;
+  margin:0 auto;
+  padding:50px;
+  display: none;
+}
+.listContainer ul{}
+.listContainer ul li{
+  cursor:pointer;
+  padding:10px;
+  margin:10px;
+  background:#ccc;
+}
+
+.pauseing {
+  background:url(../img/play.png)no-repeat !important;
+  background-size:contain !important;
+  width:100% !important;
+  height:100% !important;     
+  /* background-color: red !important;  */
+}

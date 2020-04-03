@@ -7,25 +7,25 @@
 </head>
 <body>
   <div class="container">
-    <h1 class=".a11yHidden">뮤직플레이</h1>
-    <section id="player">
-      <audio src=""></audio>
-      <div class="musicTitle">
-        <h2>Morning Mandolin</h2>
-        <p>chris haugen</p>
-      </div>
-      <ul playBtnList>
-        <li><button class="pauseing">재생</button></li>
-        <li><button>이전곡</button></li>
-        <li><button>다음곡</button></li>
-      </ul>
-      <div class="listBtn"><button>재생목록열기</button></div>
-      <div class="soundBtn"><button>사운드</button></div>
-      <div class="rangeCustom">
-        <input type="range">
+    <h1 class="a11yHidden">뮤직플레이</h1>
+    <section class="player">
+      <audio id="audio" src=""></audio>
+      <div class="playerContentArea">
+        <div class="musicTitle">
+          <h2 id="musicTitle">Morning Mandolin</h2>
+          <p id="composer">chris haugen</p>
+        </div>
+        <ul class="playBtnList">
+          <li><button name="play" type="button" class="pauseing screen-reader" id="play">재생</button></li>
+          <li><button name="pre" type="button" class="screen-reader" id="prev">이전곡</button></li>
+          <li><button name="next" type="button" class="screen-reader" id="next">다음곡</button></li>
+        </ul>
+        <button name="list" type="button" class="listBtn">재생목록열기</button>
+         <button name="sound" type="button" class="soundBtn">사운드</button>
+        <input id="progressbar" class="rangeCustom" type="range">
       </div>
     </section>
-    <section class="ListContainer">
+    <section class="listContainer">
       <h2>재생목록</h2>
       <ul class="playList">
         <li class="listContent"><strong>제목</strong><span>가수</span><span>시간</span></li>
@@ -33,6 +33,7 @@
         <li class="listContent"><strong>제목</strong><span>가수</span><span>시간</span></li>
       </ul>
     </section>
+    <script src="player.js"></script>
   </div>
 </body>
 </html>
