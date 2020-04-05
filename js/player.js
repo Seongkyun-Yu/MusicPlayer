@@ -40,7 +40,7 @@ const setMusic = (music) => {
   $composer.innerText = music.composer;
 
   $musicCover.style.backgroundImage = `url(img/${music.fileName}.jpg)`;
-  $musicCover.style.backgroundSize = 'cover';
+  // $musicCover.style.backgroundSize = 'cover';
 };
 
 // list rendering func
