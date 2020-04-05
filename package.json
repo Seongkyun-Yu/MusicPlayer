@@ -1,21 +1,26 @@
 {
-  "name": "playground",
+  "name": "MusicPlayer",
   "version": "1.0.0",
-  "description": "",
+  "description": "![musicplayer](https://user-images.githubusercontent.com/15887982/78371446-f1628800-7602-11ea-9ced-e25c27997774.png)",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Seongkyun-Yu/MusicPlayer.git"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Seongkyun-Yu/MusicPlayer/issues"
+  },
+  "homepage": "https://github.com/Seongkyun-Yu/MusicPlayer#readme",
   "devDependencies": {
     "eslint": "^6.8.0",
-    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-html": "^6.0.0",
-    "eslint-plugin-import": "^2.20.1"
-  },
-  "dependencies": {
-    "lodash": "^4.17.15"
+    "eslint-plugin-import": "^2.20.2"
   }
 }
