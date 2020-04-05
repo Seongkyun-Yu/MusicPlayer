@@ -36,9 +36,11 @@ const musics = [
 // set music func
 const setMusic = (music) => {
   $musicPlayer.src = `music/${music.fileName}.mp3`;
-  $musicCover.style.backgroundImage = `url(img/${music.fileName}.jpg)`;
   $musicTitle.innerText = music.title;
   $composer.innerText = music.composer;
+
+  $musicCover.style.backgroundImage = `url(img/${music.fileName}.jpg)`;
+  $musicCover.style.backgroundSize = 'cover';
 };
 
 // list rendering func
