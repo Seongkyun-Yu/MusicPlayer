@@ -1,4 +1,5 @@
 # Custom
+node_modules
 *.pem
 hello.*
 index.php
